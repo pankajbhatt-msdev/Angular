@@ -63,7 +63,8 @@
               "browserTarget": "kiwi-robot-shop:build:production"
             },
             "development": {
-              "browserTarget": "kiwi-robot-shop:build:development"
+              "browserTarget": "kiwi-robot-shop:build:development",
+              :"proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

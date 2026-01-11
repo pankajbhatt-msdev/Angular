@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { IProduct } from './product.model';
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -13,13 +14,18 @@ export class CatalogComponent {
   filter: string = '';
   //private cartSrvc: CartService = inject(CartService);
 
-  constructor(private cartSrvc: CartService, private productSrvc: ProductService){
+  constructor(private cartSrvc: CartService, private productSrvc: ProductService, 
+    private router: Router, private route: ActivatedRoute){
     
   }
 
 ngOnInit(){
     this.productSrvc.getProducts().subscribe(products=>{
       this.products = products;
+    });
+    //this.filter = this.route.snapshot.params['filter'];
+    this.route.queryParams.subscribe((params)=>{
+      this.filter = params['filter'] ?? '';
     })
   }
 
@@ -39,5 +45,6 @@ ngOnInit(){
 
   addToCart(product: IProduct){
     this.cartSrvc.add(product);
+    this.router.navigate(['/cart'])
    }
 }

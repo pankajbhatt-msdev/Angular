@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 
 import { IUser, IUserCredentials } from './user.model';
 
@@ -24,7 +24,12 @@ export class UserService {
       .pipe(map((user: IUser) => {
         this.user.next(user);
         return user;
-      }));
+      }),
+      catchError((error: HttpErrorResponse)=>{
+        const errorMessage = error?.error || 'Invalid Email Or Password.';
+        return throwError(()=>errorMessage);
+      }
+      ));
   }
 
   signOut() {

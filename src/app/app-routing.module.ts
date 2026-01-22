@@ -5,12 +5,14 @@ import { HomeComponent } from './home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CartComponent } from './cart/cart.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
+import { TemplateFormControlsComponent } from './user/template-form-controls/template-form-controls.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, title: "Home - Robot Shop" },
   { path: 'catalog', component: CatalogComponent, title: "Catalog - Robot Shop" },
   { path: 'cart', component: CartComponent, title: "Cart - Robot Shop" },
   {path: 'sign-in', component: SignInComponent, title: "Login - Robot Shop" },
+  {path: 'form-controls', component: TemplateFormControlsComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'}  
 ];
 
